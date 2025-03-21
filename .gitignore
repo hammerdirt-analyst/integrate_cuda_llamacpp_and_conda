@@ -1,0 +1,82 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.manifest
+*.spec
+
+# --- Virtual environments ---
+.env/
+.venv/
+env/
+venv/
+*.env
+*.venv
+
+# --- Jupyter Notebook checkpoints ---
+.ipynb_checkpoints/
+
+# --- Streamlit cache ---
+.streamlit/
+.stcache/
+.stfolder/
+
+# --- PyCharm ---
+.idea/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+
+# --- VSCode (just in case) ---
+.vscode/
+
+# --- Data/outputs ---
+*.log
+data/tmp/*.csv
+*.tsv
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.db
+*.sqlite
+*.pkl
+*.joblib
+*.npy
+*.npz
+
+# --- Geopandas / Shapefiles ---
+shapes/tmp/*.shp
+shapes/tmp/*.shx
+shapes/tmp/*.dbf
+shapes/tmp/*.prj
+shapes/tmp/*.cpg
+
+# --- CMake / C++ builds (e.g. llama.cpp) ---
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+*.cmake
+*.o
+*.obj
+*.out
+*.a
+*.so
+*.dll
+*.exe
+
+# --- OS junk ---
+Thumbs.db
+ehthumbs.db
+Icon?
+*.swp
+*.swo
