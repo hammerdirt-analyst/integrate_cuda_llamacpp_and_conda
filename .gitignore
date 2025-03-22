@@ -61,6 +61,8 @@ shapes/tmp/*.cpg
 
 # --- CMake / C++ builds (e.g. llama.cpp) ---
 build/
+models/
+logs/
 cmake-build-*/
 CMakeFiles/
 CMakeCache.txt

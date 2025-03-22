@@ -1,0 +1,32 @@
+name: llama-env
+channels:
+  - conda-forge
+  - nvidia
+  - pytorch
+  - defaults
+
+dependencies:
+  - python=3.10
+
+  # Install these first in order (manually or in lockstep)
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=12.1
+
+  # Then install the rest from conda-forge
+  - scikit-learn
+  - pandas
+  - numpy
+  - matplotlib
+  - scipy
+  - geopandas
+  - polars
+  - streamlit
+
+  - pip
+  - pip:
+      - outlines
+      - langchain
+      - langgraph
+      - llama-cpp-python
