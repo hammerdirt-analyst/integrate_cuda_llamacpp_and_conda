@@ -39,7 +39,8 @@ venv/
 
 # --- Data/outputs ---
 *.log
-data/tmp/*.csv
+# data/tmp/*.csv
+data/
 *.tsv
 *.parquet
 *.feather
