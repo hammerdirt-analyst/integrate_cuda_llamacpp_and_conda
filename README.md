@@ -181,11 +181,12 @@ This project integrates [`llama-cpp-python`](https://github.com/abetlen/llama-cp
 
 | Model                             | Size | Use Case                          | VRAM Required | Notes                                               |
 |----------------------------------|------|-----------------------------------|---------------|-----------------------------------------------------|
-| **LLaMA 3 8B (Q8_0)**            | 8B   | High-quality completions          | ~6–8 GB       | May exceed 8GB GPUs — partial CPU fallback needed   |
-| **LLaMA 3.2 3B Instruct (Q8_0)** | 3B   | Fast instruct-tuned inference     | ~3–4 GB       | ✅ Actively being tested — fast + good quality       |
-| **Mistral 7B (Q4_K_M)**          | 7B   | Balanced performance              | ~4–5 GB       | Excellent blend of speed and quality                |
-| **Phi-2 (Q4_0)**                 | 1.6B | Prototyping, fast responses       | ~2–3 GB       | Small but powerful for many tasks                   |
-| **TinyLLaMA 1.1B**               | 1.1B | Lightweight edge deployment       | ~1–2 GB       | Ideal for experiments or constrained environments   |
+| **Meta-LLaMA 3.1 8B (Q8_0)**     | 8B   | High-quality completions          | ~6–8 GB       | :x: tested exceeds GPUs — partial CPU fallback needed|
+| **LLaMA 3.2 3B Instruct (Q8_0)** | 3B   | Fast instruct-tuned inference     | ~3–4 GB       | ✅ tested — fast accurate       |
+| **llava-v1.6-mistral-7b (Q4_K_M)**| 7B   | Balanced performance              | ~4–5 GB       |:white_check_mark: tested - fast accuate               |
+| **Phi-2 (Q4_0)**                 | 1.6B | Prototyping, fast responses       | ~2–3 GB       | ❓ not tested Small but powerful for many tasks                   |
+| **TinyLLaMA 1.1B**               | 1.1B | Lightweight edge deployment       | ~1–2 GB       | ❓ not tested for experiments or constrained environments   |
+| **nomic-embed-text-v1.5 (Q8_0)** | 137M | embeddings                        | ~1–2 GB       | ✅ tested fast  |
 
 > ℹ️ *Use quantized models (`.gguf`) to reduce memory usage — especially `Q4_K_M` or `Q5_K_M` for optimal quality/speed balance.*
 
