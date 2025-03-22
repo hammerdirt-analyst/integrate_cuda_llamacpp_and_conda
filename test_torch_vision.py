@@ -108,9 +108,7 @@ class SmallCNN(nn.Module):
 # Train & Test Model (MNIST)
 @timed_step("Train and Test SmallCNN on MNIST")
 def train_test_model(device):
-    # -------------------------
     # Check if MNIST data is already downloaded
-    # -------------------------
     mnist_raw_dir = os.path.join(DATA_DIR, "MNIST", "raw")
     train_data_file = os.path.join(mnist_raw_dir, "train-images-idx3-ubyte")
     test_data_file = os.path.join(mnist_raw_dir, "t10k-images-idx3-ubyte")
@@ -140,7 +138,7 @@ def train_test_model(device):
     optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
 
     # Training Loop
-    EPOCHS = 10
+    EPOCHS = 5
     for epoch in range(EPOCHS):
         print(f"\n🔁 Epoch {epoch + 1}/{EPOCHS}")
         epoch_start = time.time()
