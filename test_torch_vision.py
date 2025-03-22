@@ -1,3 +1,22 @@
+"""
+test_torch_vision.py
+author: roger erismann
+
+PyTorch + TorchVision Functional Test Script with CUDA Verification
+
+This script verifies that PyTorch and TorchVision are properly installed and functional,
+including checking for CUDA availability. It uses the MNIST dataset and a simple custom
+CNN (SmallCNN) to perform a minimal training + evaluation run.
+
+Key features:
+- Uses MNIST as a lightweight dataset for fast testing
+- Implements a small CNN suitable for MNIST classification
+- Verifies GPU support by running on CUDA if available
+- Logs training batch loss to a file and summarizes each epoch in the terminal
+- Stores logs in ./logs/torch_vision and MNIST data in ./data
+
+Use this as a basic sanity check for PyTorch environments or Docker container validation.
+"""
 import torch
 import torchvision
 import torchvision.transforms as transforms
@@ -8,9 +27,7 @@ import logging
 import time
 from datetime import datetime
 
-# -------------------------
 # Setup logging
-# -------------------------
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(PROJECT_DIR, "data")
@@ -36,10 +53,8 @@ logging.basicConfig(
     handlers=[file_handler, console_handler]
 )
 
-# -------------------------
-# Decorator for timing
-# -------------------------
 
+# Decorator for timing
 def timed_step(name):
     def decorator(func):
         def wrapper(*args, **kwargs):
@@ -52,19 +67,13 @@ def timed_step(name):
         return wrapper
     return decorator
 
-# -------------------------
 # Version Check
-# -------------------------
-
 @timed_step("Version Check")
 def check_versions():
     logging.info(f"PyTorch version: {torch.__version__}")
     logging.info(f"TorchVision version: {torchvision.__version__}")
 
-# -------------------------
 # CUDA Check
-# -------------------------
-
 @timed_step("CUDA Check")
 def check_cuda():
     if torch.cuda.is_available():
@@ -75,10 +84,8 @@ def check_cuda():
         logging.info("CUDA not available. Running on CPU.")
     return device
 
-# -------------------------
-# Custom CNN Model for MNIST
-# -------------------------
 
+# Custom CNN Model for MNIST
 class SmallCNN(nn.Module):
     def __init__(self):
         super(SmallCNN, self).__init__()
@@ -97,10 +104,8 @@ class SmallCNN(nn.Module):
         x = self.fc2(x)
         return x
 
-# -------------------------
-# Train & Test Model (MNIST)
-# -------------------------
 
+# Train & Test Model (MNIST)
 @timed_step("Train and Test SmallCNN on MNIST")
 def train_test_model(device):
     # -------------------------
@@ -116,33 +121,25 @@ def train_test_model(device):
     else:
         logging.info("✅ Found MNIST dataset locally. Skipping download.")
 
-    # -------------------------
-    # Transforms (1-channel, no resize)
-    # -------------------------
+    # transforms (1-channel, no resize)
     transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize((0.1307,), (0.3081,))
     ])
 
-    # -------------------------
     # Datasets & Loaders
-    # -------------------------
     trainset = torchvision.datasets.MNIST(root=DATA_DIR, train=True, download=download, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=32, shuffle=True)
 
     testset = torchvision.datasets.MNIST(root=DATA_DIR, train=False, download=download, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=32, shuffle=False)
 
-    # -------------------------
     # Model, Loss, Optimizer
-    # -------------------------
     model = SmallCNN().to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
 
-    # -------------------------
     # Training Loop
-    # -------------------------
     EPOCHS = 10
     for epoch in range(EPOCHS):
         print(f"\n🔁 Epoch {epoch + 1}/{EPOCHS}")
@@ -164,9 +161,7 @@ def train_test_model(device):
         avg_loss = running_loss / len(trainloader)
         print(f"⏱️  Time: {epoch_time:.2f}s | 📉 Avg Loss: {avg_loss:.4f}")
 
-    # -------------------------
     # Evaluation
-    # -------------------------
     correct = 0
     total = 0
     with torch.no_grad():
@@ -181,9 +176,7 @@ def train_test_model(device):
     print(f"\n🎯 Final Test Accuracy: {accuracy:.2f}%")
     logging.info(f"Test Accuracy: {accuracy:.2f}%")
 
-# -------------------------
-# Main Entry
-# -------------------------
+
 
 def main():
     check_versions()

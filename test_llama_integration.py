@@ -1,9 +1,30 @@
+"""
+test_llama_integration.py
+author: roger erismann
+
+llama.cpp + CUDA Functional Test Script with Model & Embedding Validation
+
+This script verifies that `llama.cpp` is correctly integrated with CUDA support and functional
+within the current environment. It loads one or more LLM models via `llama-cpp-python`, runs
+basic inference to ensure model loading and response generation, and optionally checks various
+embeddings and configurations.
+
+Key features:
+- Validates llama.cpp CUDA support (build and runtime)
+- Loads one or more LLaMA-compatible models
+- Runs minimal inference (e.g., system prompt or basic question-answering)
+- Tests embeddings or tokenization if specified
+- Designed to be a fast sanity check for CUDA-enabled LLM environments
+
+Use this script to confirm that your llama.cpp setup works with different model sizes, backends,
+and hardware acceleration (e.g., in Docker containers or fresh environments).
+"""
+
+
+
 import time
 import os
-import sys
-from datetime import datetime
 from llama_cpp import Llama
-# from langchain.llms.llamacpp import LlamaCpp
 from contextlib import redirect_stdout, redirect_stderr
 from langchain_community.llms import LlamaCpp
 from langchain_core.prompts import PromptTemplate
