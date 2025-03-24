@@ -2,12 +2,20 @@
 
 This document explains the step-by-step process of compiling and configuring `llama.cpp` to use **CUDA** on a system with an NVIDIA GPU. It also outlines the rationale behind each step and the solution to common pitfalls.
 
+## ❔Why
+
+I have submitted a prototype for further development. I want to start with an efficient set up that uses current apis like huggingface for models and transformers and local inference when possible. This so i can find a setup that works on my computer and docker or use streamlit for deployment. 
+
+the prototype : [The state of things](https://reporterdemo-hammerdirt.streamlit.app/)
+
+the competition ; [The prototype fund](https://prototypefund.opendata.ch/en/about/digital-sufficiency/)
+
+## Local issues
+
 The 'issue' is that when conda installs `llama-cpp-python` it looks for libllama.so within the environment and ignores the the system build. 
 To correct this we make sure there is an environmental that points to the system build and build `llama-cpp-python` with the following arguments:
 ```bash
-CMAKE_ARGS="-DLLAMA_CMAKE_CUDA=on -DLLAMA_CPP_USE_VENDORED=OFF" \
-FORCE_CMAKE=1 \
-pip install git+https://github.com/abetlen/llama-cpp-python.git
+CMAKE_ARGS="-DLLAMA_CMAKE_CUDA=on -DLLAMA_CPP_USE_VENDORED=OFF" FORCE_CMAKE=1 pip install git+https://github.com/abetlen/llama-cpp-python.git
 ```
 
 Furthermore, there is a conflict with the `libcublas` version that is required by pytorch-cuda=12.1 and the version that is 
