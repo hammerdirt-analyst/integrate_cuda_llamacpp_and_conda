@@ -41,13 +41,7 @@ MODELS = [
         "chat_format": "llama-3",
         "mode": "chat"
     },
-    {
-        "path": "models/llava-v1.6-mistral-7b.Q4_K_M.gguf",
-        "name": "llava-v1.6-mistral-7b",
-        "chat_format": "mistral-instruct",
-        "mode": "chat"
-    },
-    {
+     {
         "path": "models/nomic-embed-text-v1.5.Q8_0.gguf",
         "name": "nomic-embed",
         "chat_format": None,
